@@ -1,32 +1,17 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { generateIdAsync, clearIdGeneratorError } from '../store/idGeneratorSlice';
 import './IdGenerator.css';
 
 function IdGenerator() {
   const [prefix, setPrefix] = useState('');
-  const [generatedId, setGeneratedId] = useState('');
-  const [idType, setIdType] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
-  const API_BASE_URL = 'http://localhost:3000/api/id-generator';
+  const dispatch = useDispatch();
+  const { generatedId, idType, loading, error } = useSelector(state => state.idGenerator);
 
-  const generateId = async (type) => {
-    setLoading(true);
-    setError('');
-
-    try {
-      const endpoint = `${API_BASE_URL}/${type}${prefix ? `?prefix=${encodeURIComponent(prefix)}` : ''}`;
-      const response = await axios.get(endpoint);
-
-      setGeneratedId(response.data.id);
-      setIdType(type);
-    } catch (err) {
-      console.error('Error generating ID:', err);
-      setError(`Failed to generate ID: ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
+  const generateId = (type) => {
+    dispatch(clearIdGeneratorError());
+    dispatch(generateIdAsync({ type, prefix }));
   };
 
   const copyToClipboard = () => {

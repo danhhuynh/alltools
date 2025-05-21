@@ -1,54 +1,37 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { countCharactersAsync, clearCharacterCounterError, clearCharacterCounterResult, setError } from '../store/characterCounterSlice';
 import './CharacterCounter.css';
 
 function CharacterCounter() {
   const [text, setText] = useState('');
-  const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
-  const API_BASE_URL = 'http://localhost:3000/api/character-counter';
+  const dispatch = useDispatch();
+  const { result, loading, error } = useSelector(state => state.characterCounter);
 
-  const countCharacters = async () => {
+  const countCharacters = () => {
     if (!text.trim()) {
-      setError('Please enter some text to analyze');
+      dispatch(clearCharacterCounterError());
+      dispatch(setError('Please enter some text to analyze'));
       return;
     }
 
-    setLoading(true);
-    setError('');
-
-    try {
-      // For shorter text, use GET endpoint with query parameter
-      if (text.length < 500) {
-        const response = await axios.get(`${API_BASE_URL}/count?text=${encodeURIComponent(text)}`);
-        setResult(response.data);
-      } else {
-        // For longer text, use POST endpoint with request body
-        const response = await axios.post(`${API_BASE_URL}/count`, { text });
-        setResult(response.data);
-      }
-    } catch (err) {
-      console.error('Error counting characters:', err);
-      setError(`Failed to count characters: ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
+    dispatch(clearCharacterCounterError());
+    dispatch(countCharactersAsync(text));
   };
 
   const handleTextChange = (e) => {
     setText(e.target.value);
     // Clear results when text changes
     if (result) {
-      setResult(null);
+      dispatch(clearCharacterCounterResult());
     }
   };
 
   const clearText = () => {
     setText('');
-    setResult(null);
-    setError('');
+    dispatch(clearCharacterCounterResult());
+    dispatch(clearCharacterCounterError());
   };
 
   return (
