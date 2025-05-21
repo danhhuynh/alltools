@@ -1,0 +1,101 @@
+/* IdGenerator Component Styles */
+
+/* Container for the entire component */
+.id-generator-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.id-generator-title {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form container */
+.id-generator-form {
+  margin-bottom: 20px;
+}
+
+/* Input group styling */
+.id-generator-input-group {
+  display: flex;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+/* Label styling */
+.id-generator-label {
+  width: 100px;
+  font-weight: bold;
+}
+
+/* Input field styling */
+.id-generator-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Button group styling */
+.id-generator-button-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Button styling */
+.id-generator-button {
+  padding: 10px 15px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.id-generator-button:hover {
+  background-color: #3367d6;
+}
+
+/* Result container styling */
+.id-generator-result-container {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Result title styling */
+.id-generator-result-title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Result text styling */
+.id-generator-result-text {
+  font-family: monospace;
+  word-break: break-all;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #eee;
+}
+
+/* Error message styling */
+.id-generator-error-message {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}

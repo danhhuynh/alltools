@@ -1,0 +1,37 @@
+/* Header Component Styles */
+
+/* Main header container */
+.header {
+  padding: 20px;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+/* Navigation list */
+.header-nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Navigation links */
+.header-nav-link {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.header-nav-link:hover {
+  background-color: #e0e0e0;
+  text-decoration: none;
+}
+
+/* Active navigation link */
+.header-nav-link.active {
+  color: #4285f4;
+  border-bottom: 2px solid #4285f4;
+}
