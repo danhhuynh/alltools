@@ -25,13 +25,18 @@ function IdGenerator() {
   };
 
   return (
-    <div className="id-generator-container">
+    <article className="id-generator-container">
       <h2 className="id-generator-title">ID Generator</h2>
 
-      {error && <div className="id-generator-error-message">{error}</div>}
+      {error && (
+        <aside role="alert" aria-live="assertive" className="id-generator-error-message">
+          {error}
+        </aside>
+      )}
 
-      <div className="id-generator-form">
-        <div className="id-generator-input-group">
+      <form className="id-generator-form" onSubmit={(e) => e.preventDefault()}>
+        <fieldset className="id-generator-input-group">
+          <legend className="visually-hidden">ID Generator Options</legend>
           <label className="id-generator-label" htmlFor="prefix">Prefix:</label>
           <input
             className="id-generator-input"
@@ -40,48 +45,63 @@ function IdGenerator() {
             value={prefix}
             onChange={(e) => setPrefix(e.target.value)}
             placeholder="Optional prefix (e.g., user_)"
+            aria-describedby="prefix-hint"
           />
+          <small id="prefix-hint" className="id-generator-hint">Add an optional prefix to your generated ID</small>
+        </fieldset>
+
+        <div className="id-generator-button-group" role="group" aria-label="ID generation options">
+          <button 
+            className="id-generator-button"
+            onClick={() => generateId('unique')} 
+            disabled={loading}
+            type="button"
+            aria-label="Generate Standard ID"
+          >
+            Generate Standard ID
+          </button>
+          <button 
+            className="id-generator-button"
+            onClick={() => generateId('short')} 
+            disabled={loading}
+            type="button"
+            aria-label="Generate Short ID"
+          >
+            Generate Short ID
+          </button>
+          <button 
+            className="id-generator-button"
+            onClick={() => generateId('uuid')} 
+            disabled={loading}
+            type="button"
+            aria-label="Generate UUID"
+          >
+            Generate UUID
+          </button>
         </div>
-      </div>
+      </form>
 
-      <div className="id-generator-button-group">
-        <button 
-          className="id-generator-button"
-          onClick={() => generateId('unique')} 
-          disabled={loading}
-        >
-          Generate Standard ID
-        </button>
-        <button 
-          className="id-generator-button"
-          onClick={() => generateId('short')} 
-          disabled={loading}
-        >
-          Generate Short ID
-        </button>
-        <button 
-          className="id-generator-button"
-          onClick={() => generateId('uuid')} 
-          disabled={loading}
-        >
-          Generate UUID
-        </button>
-      </div>
-
-      {loading && <p>Generating...</p>}
+      {loading && <p aria-live="polite" role="status">Generating...</p>}
 
       {generatedId && (
-        <div className="id-generator-result-container">
+        <section className="id-generator-result-container" aria-live="polite">
           <h3 className="id-generator-result-title">
             {idType === 'unique' && 'Standard Unique ID'}
             {idType === 'short' && 'Short Unique ID'}
             {idType === 'uuid' && 'UUID v4'}
           </h3>
-          <p className="id-generator-result-text">{generatedId}</p>
-          <button className="id-generator-button" onClick={copyToClipboard}>Copy to Clipboard</button>
-        </div>
+          <output className="id-generator-result-text" aria-label="Generated ID">{generatedId}</output>
+          <button 
+            className="id-generator-button" 
+            onClick={copyToClipboard}
+            type="button"
+            aria-label="Copy ID to clipboard"
+          >
+            Copy to Clipboard
+          </button>
+        </section>
       )}
-    </div>
+    </article>
   );
 }
 

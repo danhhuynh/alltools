@@ -46,6 +46,28 @@ button, input, select, textarea {
   text-align: center;
 }
 
+/* Visually hidden class for screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Character counter hint and ID generator hint */
+.character-counter-hint,
+.id-generator-hint {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
 .mt-1 { margin-top: 0.25rem; }
 .mt-2 { margin-top: 0.5rem; }
 .mt-3 { margin-top: 1rem; }
@@ -63,4 +85,8 @@ button, input, select, textarea {
   .container {
     padding: 0 10px;
   }
+}
+
+fieldset{
+  border: none;
 }

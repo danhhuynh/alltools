@@ -1,19 +1,100 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import IdGenerator from './components/IdGenerator';
 import CharacterCounter from './components/CharacterCounter';
+import SEO from './components/SEO';
 
 function App() {
+  const [activeSection, setActiveSection] = useState('home');
+
+  // Function to determine which section is currently in view
+  const handleScroll = () => {
+    const sections = ['id-generator', 'character-counter', 'feature-3', 'feature-4'];
+
+    for (const sectionId of sections) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        // If the section is in the viewport
+        if (rect.top <= 150 && rect.bottom >= 150) {
+          setActiveSection(sectionId);
+          break;
+        }
+      }
+    }
+  };
+
+  // Add scroll event listener
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(id);
     }
   };
 
+  // SEO configuration based on active section
+  const getSeoConfig = () => {
+    switch (activeSection) {
+      case 'id-generator':
+        return {
+          title: 'ID Generator',
+          description: 'Generate unique IDs, short IDs, and UUIDs with our free online ID generator tool',
+          keywords: 'id generator, uuid, unique id, short id, random id, online tool',
+          schemaType: 'WebApplication'
+        };
+      case 'character-counter':
+        return {
+          title: 'Character Counter',
+          description: 'Count characters, words, and analyze text with our free online character counter tool',
+          keywords: 'character counter, word counter, text analyzer, letter count, online tool',
+          schemaType: 'WebApplication'
+        };
+      case 'feature-3':
+        return {
+          title: 'Feature 3',
+          description: 'Coming soon - Feature 3 will provide additional functionality',
+          keywords: 'feature 3, coming soon, online tools',
+          schemaType: 'WebPage'
+        };
+      case 'feature-4':
+        return {
+          title: 'Feature 4',
+          description: 'Coming soon - Feature 4 will provide additional functionality',
+          keywords: 'feature 4, coming soon, online tools',
+          schemaType: 'WebPage'
+        };
+      default:
+        return {
+          title: '',
+          description: '',
+          keywords: '',
+          schemaType: 'WebPage'
+        };
+    }
+  };
+
+  const seoConfig = getSeoConfig();
+
   return (
     <div className="App">
+      <SEO 
+        title={seoConfig.title}
+        description={seoConfig.description}
+        keywords={seoConfig.keywords}
+        schemaType={seoConfig.schemaType}
+      />
       <Header />
 
       <nav className="navigation-bar">
