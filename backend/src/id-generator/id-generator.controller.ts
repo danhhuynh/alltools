@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { IdGeneratorService } from './id-generator.service';
 
-@Controller('api/id-generator')
+@Controller('id-generator')
 export class IdGeneratorController {
   constructor(private readonly idGeneratorService: IdGeneratorService) {}
 

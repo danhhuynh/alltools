@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { CharacterCounterService } from './character-counter.service';
 
-@Controller('api/character-counter')
+@Controller('character-counter')
 export class CharacterCounterController {
   constructor(private readonly characterCounterService: CharacterCounterService) {}
 
