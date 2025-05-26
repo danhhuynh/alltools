@@ -21,3 +21,21 @@ export const countCharacters = async (text) => {
     return response.data;
   }
 };
+
+// CSV Uploader API calls
+export const uploadCsv = async (file) => {
+  // Create a FormData object to send the file
+  const formData = new FormData();
+  formData.append('file', file);
+
+  // Set headers for multipart/form-data
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+
+  // Send the file to the backend
+  const response = await axios.post(`${API_BASE_URL}/csv-uploader/upload`, formData, config);
+  return response.data;
+};

@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import IdGenerator from './components/IdGenerator';
 import CharacterCounter from './components/CharacterCounter';
+import CsvUploader from './components/CsvUploader';
 import SEO from './components/SEO';
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
 
   // Function to determine which section is currently in view
   const handleScroll = () => {
-    const sections = ['id-generator', 'character-counter', 'feature-3', 'feature-4'];
+    const sections = ['id-generator', 'character-counter', 'csv-uploader', 'feature-4'];
 
     for (const sectionId of sections) {
       const section = document.getElementById(sectionId);
@@ -61,12 +62,12 @@ function App() {
           keywords: 'character counter, word counter, text analyzer, letter count, online tool',
           schemaType: 'WebApplication'
         };
-      case 'feature-3':
+      case 'csv-uploader':
         return {
-          title: 'Feature 3',
-          description: 'Coming soon - Feature 3 will provide additional functionality',
-          keywords: 'feature 3, coming soon, online tools',
-          schemaType: 'WebPage'
+          title: 'CSV Chart Visualizer',
+          description: 'Upload CSV files to visualize data as pie charts or line graphs with our free online CSV chart tool',
+          keywords: 'csv chart, pie chart, line chart, data visualization, time series, csv uploader, file upload, csv processing, data analysis, online tool',
+          schemaType: 'WebApplication'
         };
       case 'feature-4':
         return {
@@ -110,8 +111,8 @@ function App() {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#feature-3" onClick={(e) => { e.preventDefault(); scrollToSection('feature-3'); }}>
-              Feature 3
+            <a className="nav-link" href="#csv-uploader" onClick={(e) => { e.preventDefault(); scrollToSection('csv-uploader'); }}>
+              CSV Charts
             </a>
           </li>
           <li className="nav-item">
@@ -133,12 +134,9 @@ function App() {
           <CharacterCounter />
         </section>
 
-        <section className="section" id="feature-3">
-          <h2 className="section-title">Feature 3</h2>
-          <div className="placeholder-section">
-            <p className="placeholder-text">This is a placeholder for Feature 3. More functionality can be added here in the future.</p>
-            <button className="placeholder-button">Coming Soon</button>
-          </div>
+        <section className="section" id="csv-uploader">
+          <h2 className="section-title">CSV Chart Visualizer</h2>
+          <CsvUploader />
         </section>
 
         <section className="section" id="feature-4">
