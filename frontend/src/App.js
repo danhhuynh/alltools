@@ -4,6 +4,7 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import ContactPage from './pages/ContactPage';
 import SeoBacklinkPage from './pages/SeoBacklinkPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/seo-backlink" element={<SeoBacklinkPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
