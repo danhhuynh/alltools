@@ -11,9 +11,22 @@
     "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
     "build:frontend": "cd frontend && npm run build",
     "build:backend": "cd backend && npm run build",
-    "build": "npm run build:frontend && npm run build:backend"
+    "build": "npm run build:frontend && npm run build:backend",
+    "deploy": "chmod +x deploy.sh && ./deploy.sh",
+    "deploy:quick": "chmod +x quick-deploy.sh && ./quick-deploy.sh",
+    "pm2:start": "pm2 start ecosystem.config.js --env production",
+    "pm2:stop": "pm2 stop all",
+    "pm2:restart": "pm2 restart all",
+    "pm2:logs": "pm2 logs",
+    "pm2:status": "pm2 status",
+    "pm2:monit": "pm2 monit"
   },
-  "keywords": ["react", "nestjs", "typescript", "monorepo"],
+  "keywords": [
+    "react",
+    "nestjs",
+    "typescript",
+    "monorepo"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {

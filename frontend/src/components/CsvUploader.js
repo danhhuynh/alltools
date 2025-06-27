@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uploadCsvAsync, clearCsvUploaderError } from '../store/csvUploaderSlice';
 import PieChartDisplay from './PieChartDisplay';
 import LineChartDisplay from './LineChartDisplay';
+import BarChartDisplay from './BarChartDisplay';
+import ScatterPlotDisplay from './ScatterPlotDisplay';
 import './CsvUploader.css';
 
 function CsvUploader() {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
+  const [preferredChartType, setPreferredChartType] = useState('bar'); // Default to bar chart
 
   const dispatch = useDispatch();
   const { uploadResult, loading, error } = useSelector(state => state.csvUploader);
@@ -25,6 +28,43 @@ function CsvUploader() {
       key.toLowerCase().includes('month') ||
       key.toLowerCase().includes('year')
     );
+  };
+
+  // Function to detect if data is suitable for a scatter plot (has X and Y columns)
+  const isScatterPlotData = (data) => {
+    if (!data || data.length === 0) return false;
+
+    // Check if first row has X and Y columns or similar
+    const firstRow = data[0];
+    const hasXColumn = Object.keys(firstRow).some(key => 
+      key === 'X' || 
+      key.toLowerCase() === 'x' || 
+      key.toLowerCase().includes('xaxis') || 
+      key.toLowerCase().includes('xvalue')
+    );
+
+    const hasYColumn = Object.keys(firstRow).some(key => 
+      key === 'Y' || 
+      key.toLowerCase() === 'y' || 
+      key.toLowerCase().includes('yaxis') || 
+      key.toLowerCase().includes('yvalue')
+    );
+
+    return hasXColumn && hasYColumn;
+  };
+
+  // Function to detect chart type based on data structure
+  const detectChartType = (data) => {
+    if (!data || data.length === 0) return preferredChartType; // Use preferred chart type as default
+
+    if (isTimeSeriesData(data)) {
+      return 'line';
+    } else if (isScatterPlotData(data)) {
+      return 'scatter';
+    } else {
+      // For categorical data, use the user's preferred chart type
+      return preferredChartType;
+    }
   };
 
   const handleFileChange = (e) => {
@@ -97,7 +137,7 @@ function CsvUploader() {
               <strong>Supported CSV formats:</strong>
               <div className="csv-format-examples">
                 <div>
-                  <h4>Category Data (Pie Chart):</h4>
+                  <h4>Category Data (Pie/Bar Chart):</h4>
                   <pre className="csv-format-example">
 Category,Value
 Electronics,35
@@ -118,6 +158,18 @@ Date,Sales
 2024-04,170
 2024-05,210
 2024-06,190
+                  </pre>
+                </div>
+                <div>
+                  <h4>Coordinate Data (Scatter Plot):</h4>
+                  <pre className="csv-format-example">
+X,Y
+10,20
+15,35
+25,40
+30,25
+45,50
+60,45
                   </pre>
                 </div>
               </div>
@@ -165,11 +217,43 @@ Date,Sales
                   File uploaded successfully! {uploadResult.message}
                 </p>
                 {uploadResult.preview && uploadResult.preview.length > 0 && (
-                  isTimeSeriesData(uploadResult.preview) ? (
-                    <LineChartDisplay data={uploadResult.preview} />
-                  ) : (
-                    <PieChartDisplay data={uploadResult.preview} />
-                  )
+                  <>
+                    {/* Chart type selector - only show for categorical data */}
+                    {!isTimeSeriesData(uploadResult.preview) && !isScatterPlotData(uploadResult.preview) && (
+                      <div className="chart-type-selector">
+                        <label>Chart Type: </label>
+                        <div className="chart-type-buttons">
+                          <button 
+                            className={`chart-type-button ${preferredChartType === 'bar' ? 'active' : ''}`}
+                            onClick={() => setPreferredChartType('bar')}
+                          >
+                            Bar Chart
+                          </button>
+                          <button 
+                            className={`chart-type-button ${preferredChartType === 'pie' ? 'active' : ''}`}
+                            onClick={() => setPreferredChartType('pie')}
+                          >
+                            Pie Chart
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                    {(() => {
+                      const chartType = detectChartType(uploadResult.preview);
+                      switch (chartType) {
+                        case 'line':
+                          return <LineChartDisplay data={uploadResult.preview} />;
+                        case 'bar':
+                          return <BarChartDisplay data={uploadResult.preview} />;
+                        case 'scatter':
+                          return <ScatterPlotDisplay data={uploadResult.preview} />;
+                        case 'pie':
+                          return <PieChartDisplay data={uploadResult.preview} />;
+                        default:
+                          return <BarChartDisplay data={uploadResult.preview} />;
+                      }
+                    })()}
+                  </>
                 )}
               </>
             ) : (
