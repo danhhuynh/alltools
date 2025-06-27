@@ -1,0 +1,243 @@
+.seo-backlink-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.seo-backlink-title {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.seo-backlink-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.seo-backlink-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.seo-backlink-form-group label {
+  font-weight: 600;
+  color: #333;
+}
+
+.seo-backlink-textarea,
+.seo-backlink-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.seo-backlink-textarea:focus,
+.seo-backlink-input:focus {
+  border-color: #4285f4;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+.seo-backlink-button {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+  align-self: flex-start;
+}
+
+.seo-backlink-button:hover {
+  background-color: #3367d6;
+}
+
+.seo-backlink-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.seo-backlink-message {
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.seo-backlink-message.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-left: 3px solid #2e7d32;
+}
+
+.seo-backlink-message.error {
+  background-color: #ffebee;
+  color: #d32f2f;
+  border-left: 3px solid #d32f2f;
+}
+
+.seo-backlink-textarea {
+  resize: vertical; /* Allow vertical resizing */
+}
+
+.char-counter {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: right;
+  margin-top: 5px;
+}
+
+/* Backlink list section */
+.seo-backlink-list-zone {
+  width: 100%;
+  max-width: 1400px;
+  margin: 40px auto 0 auto;
+  background: #f7f9fb;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  padding: 32px 24px 48px 24px;
+  min-height: 400px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.seo-backlink-list {
+  margin-top: 0;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.backlink-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  width: 100%;
+  justify-items: stretch;
+  box-sizing: border-box;
+}
+
+.loading-indicator {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
+
+.observer-target {
+  height: 20px;
+  margin: 20px 0;
+}
+
+.no-more-backlinks {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+  border-top: 1px solid #eee;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+/* Form section */
+.seo-backlink-form-section {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .seo-backlink-list-zone {
+    padding: 16px 8px 24px 8px;
+    max-width: 100%;
+  }
+  .seo-backlink-list {
+    width: 100%;
+  }
+  .backlink-cards-grid {
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .seo-backlink-container {
+    padding: 15px;
+  }
+  .seo-backlink-list-zone {
+    padding: 8px 2px 16px 2px;
+    border-radius: 8px;
+  }
+  .seo-backlink-list {
+    width: 100%;
+    padding: 0 2px;
+  }
+  .backlink-cards-grid {
+    gap: 8px;
+    grid-template-columns: 1fr;
+  }
+  .seo-backlink-button {
+    width: 100%;
+  }
+  .seo-backlink-form-section {
+    padding: 15px;
+  }
+  .seo-backlink-list-title {
+    font-size: 1.2rem;
+  }
+}
+
+.seo-backlink-list-zone-main {
+  width: 90vw;
+  margin: 48px auto 0 auto;
+  background: #f7f9fb;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  padding: 32px 24px 48px 24px;
+  min-height: 400px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+@media (max-width: 1200px) {
+  .seo-backlink-list-zone-main {
+    width: 90vw;
+    max-width: 98vw;
+    padding: 16px 8px 24px 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .seo-backlink-list-zone-main {
+    width: 100vw;
+    max-width: 100vw;
+    padding: 8px 2px 16px 2px;
+    border-radius: 8px;
+  }
+}
