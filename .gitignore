@@ -9,6 +9,10 @@ lerna-debug.log*
 package-lock.json
 uploads
 database.sqlite
+# Ignore database and config files
+backend/data/*
+backend/database.sqlite
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
