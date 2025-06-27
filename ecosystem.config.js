@@ -25,7 +25,7 @@ module.exports = {
       name: 'alltools-frontend',
       script: 'serve',
       cwd: './frontend',
-      args: 'serve -s build -l 5000',
+      args: ['-s', 'build', '-l', '5000'],
       instances: 1,
       autorestart: true,
       watch: false,
