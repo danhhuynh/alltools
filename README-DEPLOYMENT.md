@@ -107,15 +107,15 @@ pm2 delete alltools-frontend
 
 After deployment, your applications will be available at:
 
-- **Frontend**: http://localhost:3000
-- **Backend**: http://localhost:3001
+- **Frontend**: http://localhost:5000
+- **Backend**: http://localhost:3000
 
 ## Environment Configuration
 
 The deployment automatically sets:
 - `NODE_ENV=production`
-- Frontend port: 3000
-- Backend port: 3001
+- Frontend port: 5000
+- Backend port: 3000
 
 ## Data Persistence
 
