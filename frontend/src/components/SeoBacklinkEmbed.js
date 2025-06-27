@@ -3,7 +3,7 @@ import './SeoBacklinkEmbed.css';
 import { saveBacklink, getBacklinks } from "../services/apiService";
 import BacklinkCard from './BacklinkCard';
 
-function SeoBacklinkEmbed() {
+function SeoBacklinkEmbed({ showCreateForm = true }) {
   const [formData, setFormData] = useState({
     description: '',
     url_link: ''
@@ -83,45 +83,47 @@ function SeoBacklinkEmbed() {
   return (
     <>
       <div className="seo-backlink-container">
-        <div className="seo-backlink-form-section">
-          <h2 className="seo-backlink-title">Create a New Backlink</h2>
-          {submitResult && (
-            <div className={`seo-backlink-message ${submitResult.success ? 'success' : 'error'}`}>
-              {submitResult.message}
-            </div>
-          )}
-          <form className="seo-backlink-form" onSubmit={handleSubmit}>
-            <div className="seo-backlink-form-group">
-              <label htmlFor="description">Description:</label>
-              <textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                placeholder="Enter description (max 400 chars)"
-                rows="4"
-                className="seo-backlink-textarea"
-                maxLength="400"
-              />
-              <div className="char-counter">{formData.description.length}/400</div>
-            </div>
-            <div className="seo-backlink-form-group">
-              <label htmlFor="url_link">URL Link:</label>
-              <input
-                type="text"
-                id="url_link"
-                name="url_link"
-                value={formData.url_link}
-                onChange={handleChange}
-                placeholder="https://example.com"
-                className="seo-backlink-input"
-              />
-            </div>
-            <button type="submit" className="seo-backlink-button" disabled={isSubmitting}>
-              {isSubmitting ? 'Saving...' : 'Save Backlink'}
-            </button>
-          </form>
-        </div>
+        {showCreateForm && (
+          <div className="seo-backlink-form-section">
+            <h2 className="seo-backlink-title">Create a New Backlink</h2>
+            {submitResult && (
+              <div className={`seo-backlink-message ${submitResult.success ? 'success' : 'error'}`}>
+                {submitResult.message}
+              </div>
+            )}
+            <form className="seo-backlink-form" onSubmit={handleSubmit}>
+              <div className="seo-backlink-form-group">
+                <label htmlFor="description">Description:</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Enter description (max 400 chars)"
+                  rows="4"
+                  className="seo-backlink-textarea"
+                  maxLength="400"
+                />
+                <div className="char-counter">{formData.description.length}/400</div>
+              </div>
+              <div className="seo-backlink-form-group">
+                <label htmlFor="url_link">URL Link:</label>
+                <input
+                  type="text"
+                  id="url_link"
+                  name="url_link"
+                  value={formData.url_link}
+                  onChange={handleChange}
+                  placeholder="https://example.com"
+                  className="seo-backlink-input"
+                />
+              </div>
+              <button type="submit" className="seo-backlink-button" disabled={isSubmitting}>
+                {isSubmitting ? 'Saving...' : 'Save Backlink'}
+              </button>
+            </form>
+          </div>
+        )}
       </div>
 
       {/* New top-level container for backlinks list, 2/3 screen width */}

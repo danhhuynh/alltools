@@ -46,14 +46,14 @@ function SeoBacklinkPage() {
         <section className="section">
           <h2 className="section-title">SEO Backlink Embed</h2>
 
-          {isAuthenticated ? (
-            <SeoBacklinkEmbed />
-          ) : (
+          {!isAuthenticated && (
             <div className="auth-required-container">
               <h3>Authentication Required</h3>
-                <p style={{ paddingBottom: "5px" }}>Please log in to access the SEO Backlink Embed tool.</p>              <Login />
+              <p style={{ paddingBottom: "5px" }}>Please log in to create a new backlink.</p>
+              <Login />
             </div>
           )}
+          <SeoBacklinkEmbed showCreateForm={isAuthenticated} />
         </section>
       </main>
     </div>
