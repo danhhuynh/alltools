@@ -6,7 +6,7 @@ export class SeoBacklink {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 200 })
+  @Column({ type: 'varchar', length: 400 })
   description: string;
 
   @Column()

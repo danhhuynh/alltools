@@ -98,12 +98,12 @@ function SeoBacklinkEmbed() {
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
-                placeholder="Enter description (max 200 chars)"
+                placeholder="Enter description (max 400 chars)"
                 rows="4"
                 className="seo-backlink-textarea"
-                maxLength="200"
+                maxLength="400"
               />
-              <div className="char-counter">{formData.description.length}/200</div>
+              <div className="char-counter">{formData.description.length}/400</div>
             </div>
             <div className="seo-backlink-form-group">
               <label htmlFor="url_link">URL Link:</label>

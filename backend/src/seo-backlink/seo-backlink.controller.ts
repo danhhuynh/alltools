@@ -16,8 +16,8 @@ export class SeoBacklinkController {
         throw new HttpException('Description and URL link are required', HttpStatus.BAD_REQUEST);
       }
 
-      if (createBacklinkDto.description.length > 200) {
-        throw new HttpException('Description cannot exceed 200 characters', HttpStatus.BAD_REQUEST);
+      if (createBacklinkDto.description.length > 400) {
+        throw new HttpException('Description cannot exceed 400 characters', HttpStatus.BAD_REQUEST);
       }
 
       // Validate URL format

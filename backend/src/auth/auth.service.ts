@@ -6,12 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
 import {Client} from 'node-mailjet';
 import { randomInt } from 'crypto';
-
-const mailjet = new Client({
-  apiKey: '8a530fe4e938bca137233a8465f8f537',
-  apiSecret: '644f56d14fbe4cd4fd11a2e861c4146a'
-});
-const SENDER_EMAIL = 'weareking0202@gmail.com';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +14,19 @@ export class AuthService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
     private jwtService: JwtService,
+    private configService: ConfigService,
   ) {}
+
+  private get mailjet() {
+    return new Client({
+      apiKey: this.configService.get('MAILJET_API_KEY', process.env.MAILJET_API_KEY),
+      apiSecret: this.configService.get('MAILJET_API_SECRET', process.env.MAILJET_API_SECRET),
+    });
+  }
+
+  private get senderEmail() {
+    return this.configService.get('SENDER_EMAIL', process.env.SENDER_EMAIL);
+  }
 
   async signup(email: string, password: string): Promise<any> {
     // Check if user already exists
@@ -50,12 +57,12 @@ export class AuthService {
     await this.usersRepository.save(user);
 
     // Send OTP email
-    await mailjet
+    await this.mailjet
       .post("send", { version: 'v3.1' })
       .request({
         Messages: [
           {
-            From: { Email: SENDER_EMAIL, Name: 'OTP Verification' },
+            From: { Email: this.senderEmail, Name: 'OTP Verification' },
             To: [{ Email: email }],
             Subject: 'Your OTP Code',
             TextPart: `Your OTP code is: ${otp}`,
